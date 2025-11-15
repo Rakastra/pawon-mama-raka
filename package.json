@@ -1,0 +1,31 @@
+{
+  "name": "pawon-mamaraka",
+  "version": "2.0.0",
+  "description": "Sistem pre-order terintegrasi dengan katalog menu dan user requests",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx live-server --port=3000",
+    "deploy": "netlify deploy --prod",
+    "deploy:draft": "netlify deploy"
+  },
+  "keywords": [
+    "pre-order",
+    "food",
+    "catalog",
+    "firebase",
+    "admin",
+    "user-management",
+    "requests"
+  ],
+  "author": "Pawon Mamaraka",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/pawon-mamaraka.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pawon-mamaraka/issues",
+    "email": "pandeecp6@gmail.com"
+  },
+  "homepage": "https://pawonmamaraka.netlify.app"
+}

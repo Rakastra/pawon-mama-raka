@@ -1,0 +1,392 @@
+/* ========================================
+   Baking Loading Animation - IMPROVED VERSION
+   File: css/loading-baking.css
+   ======================================== */
+
+/* Baking Loading Overlay */
+.baking-loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Baking Container - Simplified */
+.baking-container {
+    text-align: center;
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+/* Enhanced Floating Ingredients */
+.floating-ingredient {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0;
+    animation: floatInOut 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.3));
+}
+
+.floating-ingredient:nth-child(1) { 
+    top: 15%; 
+    left: 20%; 
+    animation-delay: 0s; 
+    font-size: 2.2rem;
+}
+.floating-ingredient:nth-child(2) { 
+    top: 25%; 
+    right: 15%; 
+    animation-delay: 0.5s; 
+    font-size: 1.8rem;
+}
+.floating-ingredient:nth-child(3) { 
+    bottom: 35%; 
+    left: 10%; 
+    animation-delay: 1s; 
+    font-size: 2rem;
+}
+.floating-ingredient:nth-child(4) { 
+    bottom: 20%; 
+    right: 25%; 
+    animation-delay: 1.5s; 
+    font-size: 2.1rem;
+}
+.floating-ingredient:nth-child(5) { 
+    top: 40%; 
+    left: 45%; 
+    animation-delay: 2s; 
+    font-size: 1.9rem;
+}
+.floating-ingredient:nth-child(6) { 
+    bottom: 45%; 
+    right: 40%; 
+    animation-delay: 2.5s; 
+    font-size: 2rem;
+}
+
+@keyframes floatInOut {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-40px) rotate(180deg) scale(1.1);
+        opacity: 1;
+    }
+    75% {
+        transform: translateY(-20px) rotate(270deg) scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* Central Baking Animation - Simplified and Elegant */
+.central-baking {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+}
+
+.baking-dough {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(145deg, #f0c992, #d4a574);
+    border-radius: 50% 50% 40% 40%;
+    margin: 0 auto;
+    position: relative;
+    animation: doughRise 2s ease-in-out infinite alternate;
+    box-shadow: 
+        inset 0 -8px 16px rgba(139, 69, 19, 0.4),
+        0 0 20px rgba(240, 201, 146, 0.3),
+        0 0 40px rgba(6, 182, 212, 0.2);
+}
+
+.baking-dough::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 12px;
+    background: linear-gradient(90deg, #8b4513, #a0522d);
+    top: 15px;
+    left: 10px;
+    border-radius: 15px;
+    opacity: 0.7;
+    animation: crustGlow 2s ease-in-out infinite alternate;
+}
+
+.baking-dough::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 6px;
+    background: linear-gradient(90deg, #a0522d, #cd853f);
+    bottom: 10px;
+    left: 15px;
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+@keyframes doughRise {
+    0% {
+        transform: scale(1) translateY(0);
+        box-shadow: 
+            inset 0 -8px 16px rgba(139, 69, 19, 0.4),
+            0 0 20px rgba(240, 201, 146, 0.3),
+            0 0 40px rgba(6, 182, 212, 0.2);
+    }
+    100% {
+        transform: scale(1.15) translateY(-10px);
+        box-shadow: 
+            inset 0 -8px 16px rgba(139, 69, 19, 0.6),
+            0 0 30px rgba(240, 201, 146, 0.5),
+            0 0 60px rgba(6, 182, 212, 0.4);
+    }
+}
+
+@keyframes crustGlow {
+    0% {
+        opacity: 0.5;
+        background: linear-gradient(90deg, #8b4513, #a0522d);
+    }
+    100% {
+        opacity: 0.9;
+        background: linear-gradient(90deg, #a0522d, #cd853f);
+    }
+}
+
+/* Baking Glow Effect */
+.baking-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+    animation: pulseGlow 3s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+/* Loading Text - Improved */
+.baking-text {
+    margin-top: 160px;
+    color: #06b6d4;
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: relative;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.baking-text::after {
+    content: '';
+    animation: bakingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes bakingDots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* Progress Bar - Enhanced */
+.baking-progress-container {
+    width: 200px;
+    margin: 20px auto 0;
+    position: relative;
+}
+
+.baking-progress-text {
+    font-size: 0.8rem;
+    color: #06b6d4;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.baking-progress {
+    width: 100%;
+    height: 6px;
+    background: rgba(42, 42, 42, 0.8);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.baking-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #06b6d4, #0ea5e9, #38bdf8);
+    border-radius: 3px;
+    position: absolute;
+    animation: progressWave 2s ease-in-out infinite;
+    transform-origin: left;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+@keyframes progressWave {
+    0% {
+        transform: scaleX(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scaleX(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(1);
+        opacity: 0.7;
+    }
+}
+
+/* Success Animation - Enhanced */
+.baking-success .baking-dough {
+    animation: successBounce 0.8s ease-out;
+}
+
+.baking-success .floating-ingredient {
+    animation: successFloat 1s ease-out forwards;
+}
+
+@keyframes successBounce {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    80% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes successFloat {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Theme Variations */
+.baking-loading-login .baking-text {
+    color: #10b981;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.baking-loading-logout .baking-text {
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.baking-loading-processing .baking-text {
+    color: #8b5cf6;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .baking-container {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .central-baking {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .baking-dough {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .baking-dough::before {
+        width: 45px;
+        height: 10px;
+        top: 12px;
+        left: 7.5px;
+    }
+    
+    .baking-dough::after {
+        width: 35px;
+        height: 5px;
+        bottom: 8px;
+        left: 12.5px;
+    }
+    
+    .baking-glow {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .baking-text {
+        margin-top: 120px;
+        font-size: 1rem;
+    }
+    
+    .floating-ingredient {
+        font-size: 1.6rem;
+    }
+    
+    .floating-ingredient:nth-child(1) { font-size: 1.8rem; }
+    .floating-ingredient:nth-child(2) { font-size: 1.5rem; }
+    .floating-ingredient:nth-child(3) { font-size: 1.6rem; }
+    .floating-ingredient:nth-child(4) { font-size: 1.7rem; }
+    .floating-ingredient:nth-child(5) { font-size: 1.5rem; }
+    .floating-ingredient:nth-child(6) { font-size: 1.6rem; }
+}
+
+/* Dark Mode Enhancement */
+@media (prefers-color-scheme: dark) {
+    .baking-loading-overlay {
+        background: linear-gradient(135deg, #0a0a0a 0%, #111827 100%);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .floating-ingredient,
+    .baking-dough,
+    .baking-glow,
+    .baking-progress-bar {
+        animation-duration: 0.1s;
+        animation-iteration-count: 1;
+    }
+    
+    .baking-text::after {
+        animation: none;
+        content: '...';
+    }
+}

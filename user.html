@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Orders - Pawon Mamaraka</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loading-baking.css">
+</head>
+<body class="bg-neutral-950 text-neutral-100 antialiased font-[Inter]">
+    <!-- Top bar -->
+    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 border-b border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="h-16 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="h-8 w-8 grid place-items-center rounded border border-white/15 bg-neutral-900 text-cyan-300 tracking-tight font-semibold">
+                        PM
+                    </div>
+                    <div class="leading-tight">
+                        <div class="text-sm sm:text-base font-semibold tracking-tight text-white">Pawon Mamaraka</div>
+                        <div class="text-[11px] text-neutral-400">My Orders</div>
+                    </div>
+                </a>
+
+                <!-- Navigation -->
+                <nav class="flex items-center gap-6 text-sm">
+                    <button data-user-tab="orders" class="user-tab-btn user-tab-active text-neutral-300 hover:text-white transition-colors">Pesanan Saya</button>
+                    <button data-user-tab="requests" class="user-tab-btn text-neutral-300 hover:text-white transition-colors">Request Saya</button>
+                    <button id="btn-signout" class="rounded-md px-3 py-2 text-sm font-medium border border-white/10 bg-neutral-900 hover:bg-neutral-800 transition-colors">
+                        Keluar
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
+        <!-- My Orders Section -->
+        <section id="user-section-orders" class="user-tab-content active">
+            <!-- Existing orders content -->
+        </section>
+
+        <!-- My Requests Section -->
+        <section id="user-section-requests" class="user-tab-content hidden">
+            <h2 class="text-2xl font-semibold mb-6">Request Pre-Order Saya</h2>
+            
+            <!-- Requests Filter -->
+            <div class="flex gap-2 mb-6 flex-wrap">
+                <button data-request-status="all" class="request-filter-btn rounded-full px-4 py-2 text-sm font-medium bg-cyan-600 text-white">Semua</button>
+                <button data-request-status="pending" class="request-filter-btn rounded-full px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-900 hover:bg-neutral-800">Pending</button>
+                <button data-request-status="approved" class="request-filter-btn rounded-full px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-900 hover:bg-neutral-800">Disetujui</button>
+                <button data-request-status="rejected" class="request-filter-btn rounded-full px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-900 hover:bg-neutral-800">Ditolak</button>
+            </div>
+
+            <!-- Requests List -->
+            <div id="user-requests-container" class="space-y-4">
+                <!-- User requests will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-requests" class="text-center py-12 hidden">
+                <div class="text-neutral-400 mb-4">Belum ada request pre-order</div>
+                <a href="index.html#katalog" class="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
+                    <i data-lucide="plus" class="h-4 w-4"></i>
+                    Request Pre-Order Baru
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Request PO Modal -->
+    <div id="request-po-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <!-- Modal for requesting PO from catalog -->
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 w-full max-w-md">
+                <h3 class="text-xl font-semibold mb-4">Detail Pesanan</h3>
+                
+                <div id="order-detail-content" class="space-y-4">
+                    <!-- Order details will be loaded here -->
+                </div>
+
+                <div class="flex gap-3 pt-4">
+                    <button id="btn-close-modal" class="flex-1 rounded-md px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-800 hover:bg-neutral-700 transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Firebase and User Script -->
+    <script type="module" src="js/user.js"></script>
+</body>
+</html>

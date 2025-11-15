@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Pawon Mamaraka</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loading-baking.css">
+</head>
+<body class="bg-neutral-950 text-neutral-100 antialiased font-[Inter]">
+    <!-- Top bar -->
+    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 border-b border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="h-16 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="h-8 w-8 grid place-items-center rounded border border-white/15 bg-neutral-900 text-cyan-300 tracking-tight font-semibold">
+                        PM
+                    </div>
+                    <div class="leading-tight">
+                        <div class="text-sm sm:text-base font-semibold tracking-tight text-white">Pawon Mamaraka</div>
+                        <div class="text-[11px] text-neutral-400">Admin Panel</div>
+                    </div>
+                </a>
+
+                <!-- Navigation -->
+                <nav class="flex items-center gap-6 text-sm">
+                    <button data-tab="preorders" class="tab-btn tab-active text-neutral-300 hover:text-white transition-colors">Pre-Orders</button>
+                    <button data-tab="catalog" class="tab-btn text-neutral-300 hover:text-white transition-colors">Katalog</button>
+                    <button data-tab="requests" class="tab-btn text-neutral-300 hover:text-white transition-colors">User Requests</button>
+                    <button data-tab="orders" class="tab-btn text-neutral-300 hover:text-white transition-colors">Orders</button>
+                    <button id="btn-signout" class="rounded-md px-3 py-2 text-sm font-medium border border-white/10 bg-neutral-900 hover:bg-neutral-800 transition-colors">
+                        Keluar
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Pre-Orders Section (existing) -->
+    <section id="section-preorders" class="tab-content active">
+        <!-- Existing preorders content -->
+    </section>
+
+    <!-- Katalog Section (new) -->
+    <section id="section-catalog" class="tab-content hidden">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold">Kelola Katalog Menu</h2>
+            <button id="btn-add-catalog" class="rounded-md px-4 py-2 text-sm font-medium bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
+                + Tambah Menu
+            </button>
+        </div>
+
+        <!-- Catalog Filter -->
+        <div class="flex gap-4 mb-6">
+            <select id="catalog-category-filter" class="rounded-md border border-white/10 bg-neutral-900 px-3 py-2 text-sm">
+                <option value="all">Semua Kategori</option>
+                <option value="main-course">Main Course</option>
+                <option value="dessert">Dessert</option>
+                <option value="snack">Snack</option>
+                <option value="beverage">Beverage</option>
+            </select>
+            <select id="catalog-status-filter" class="rounded-md border border-white/10 bg-neutral-900 px-3 py-2 text-sm">
+                <option value="all">Semua Status</option>
+                <option value="active">Aktif</option>
+                <option value="inactive">Nonaktif</option>
+            </select>
+        </div>
+
+        <!-- Catalog List -->
+        <div id="catalog-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Catalog items will be loaded here -->
+        </div>
+    </section>
+
+    <!-- User Requests Section (new) -->
+    <section id="section-requests" class="tab-content hidden">
+        <h2 class="text-2xl font-semibold mb-6">User Requests</h2>
+
+        <!-- Requests Filter -->
+        <div class="flex gap-4 mb-6">
+            <select id="requests-status-filter" class="rounded-md border border-white/10 bg-neutral-900 px-3 py-2 text-sm">
+                <option value="all">Semua Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Disetujui</option>
+                <option value="rejected">Ditolak</option>
+            </select>
+        </div>
+
+        <!-- Requests List -->
+        <div id="requests-list" class="bg-neutral-900/60 rounded-xl border border-white/10 overflow-hidden">
+            <div class="grid grid-cols-12 gap-4 p-4 border-b border-white/10 text-sm font-medium text-neutral-400">
+                <div class="col-span-3">Menu</div>
+                <div class="col-span-2">User</div>
+                <div class="col-span-1">Jumlah</div>
+                <div class="col-span-2">Deadline</div>
+                <div class="col-span-2">Status</div>
+                <div class="col-span-2">Aksi</div>
+            </div>
+            <div id="requests-container">
+                <!-- Requests will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Orders Section (existing) -->
+    <section id="section-orders" class="tab-content hidden">
+        <!-- Existing orders content -->
+    </section>
+</main>
+
+        <div id="catalog-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 w-full max-w-2xl">
+                <h3 class="text-xl font-semibold mb-4" id="catalog-modal-title">Tambah Menu Katalog</h3>
+                
+                <form id="catalog-form" class="space-y-4">
+                    <input type="hidden" id="catalog-id">
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Nama Menu</label>
+                            <input type="text" id="catalog-title" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Kategori</label>
+                            <select id="catalog-category" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                                <option value="main-course">Main Course</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="snack">Snack</option>
+                                <option value="beverage">Beverage</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-300 mb-1">Deskripsi</label>
+                        <textarea id="catalog-description" required rows="3" class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">URL Gambar</label>
+                            <input type="url" id="catalog-image" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Harga</label>
+                            <input type="number" id="catalog-price" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-300 mb-1">Tags (pisahkan dengan koma)</label>
+                        <input type="text" id="catalog-tags" class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm" placeholder="family, spicy, popular">
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="catalog-active" class="rounded border-white/10 bg-neutral-800">
+                        <label class="ml-2 text-sm font-medium text-neutral-300">Aktif di katalog</label>
+                    </div>
+
+                    <div class="flex gap-3 pt-4">
+                        <button type="submit" class="flex-1 rounded-md px-4 py-2 text-sm font-medium bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
+                            Simpan
+                        </button>
+                        <button type="button" id="btn-cancel-catalog" class="flex-1 rounded-md px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-800 hover:bg-neutral-700 transition-colors">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Pre-Order Modal -->
+    <div id="preorder-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 w-full max-w-2xl">
+                <h3 class="text-xl font-semibold mb-4" id="modal-title">Tambah Pre-Order</h3>
+                
+                <form id="preorder-form" class="space-y-4">
+                    <input type="hidden" id="preorder-id">
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Judul</label>
+                            <input type="text" id="preorder-title" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Harga</label>
+                            <input type="number" id="preorder-price" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-300 mb-1">Deskripsi</label>
+                        <textarea id="preorder-description" required rows="3" class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-300 mb-1">URL Gambar</label>
+                        <input type="url" id="preorder-image" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Deadline</label>
+                            <input type="datetime-local" id="preorder-deadline" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Estimasi Kirim</label>
+                            <input type="text" id="preorder-delivery" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm" placeholder="Besok 07.00-10.00 WIB">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Max Quantity</label>
+                            <input type="number" id="preorder-maxqty" required class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="preorder-active" class="rounded border-white/10 bg-neutral-800">
+                            <label class="ml-2 text-sm font-medium text-neutral-300">Aktif</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="preorder-featured" class="rounded border-white/10 bg-neutral-800">
+                            <label class="ml-2 text-sm font-medium text-neutral-300">Featured</label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-neutral-300 mb-1">Urutan Tampil</label>
+                            <input type="number" id="preorder-display-order" class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm" value="0">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-300 mb-1">Tags (pisahkan dengan koma)</label>
+                        <input type="text" id="preorder-tags" class="w-full rounded-md border border-white/10 bg-neutral-800 px-3 py-2 text-sm" placeholder="family, special, limited">
+                    </div>
+
+                    <div class="flex gap-3 pt-4">
+                        <button type="submit" class="flex-1 rounded-md px-4 py-2 text-sm font-medium bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
+                            Simpan
+                        </button>
+                        <button type="button" id="btn-cancel-modal" class="flex-1 rounded-md px-4 py-2 text-sm font-medium border border-white/10 bg-neutral-800 hover:bg-neutral-700 transition-colors">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Detail Modal -->
+    <div id="request-detail-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <!-- Modal content for request details -->
+    </div>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Firebase and Admin Script -->
+    <script type="module" src="js/admin.js"></script>
+
+    <!-- Invoice Modal -->
+<div id="invoice-modal-container"></div>
+
+</body>
+</html>
